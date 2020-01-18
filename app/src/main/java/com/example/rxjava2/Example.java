@@ -9,6 +9,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 
 
 public class Example {
@@ -28,6 +29,14 @@ public class Example {
         }
     });*/
     public static void main(String[] args) throws IOException {
+        String str = "r";
+
+        Function<String,Integer> myFuncForMap = new Function<String, Integer>(){
+            @Override
+            public Integer apply(String s) throws Exception {
+                return Integer.parseInt(s)*2;
+            }
+        };
         Observable<String> observable = Observable.fromArray("a", "b", "c", "d");
         Observer<String> observer = new Observer<String>() {
             @Override
@@ -54,6 +63,13 @@ public class Example {
             }
         };
         observable.subscribe(observer);
+        try {
+            System.out.println(myFuncForMap.apply(str));
+        }catch (Exception e){
+            System.out.println("catch exception "+e);
+        }
+
+
     }
 
 }
