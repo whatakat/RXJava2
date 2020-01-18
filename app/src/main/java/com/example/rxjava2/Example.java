@@ -29,7 +29,7 @@ public class Example {
         }
     });*/
     public static void main(String[] args) throws IOException {
-        String str = "r";
+        String str = "4";
 
         Function<String,Integer> myFuncForMap = new Function<String, Integer>(){
             @Override
@@ -37,7 +37,7 @@ public class Example {
                 return Integer.parseInt(s)*2;
             }
         };
-        Observable<String> observable = Observable.fromArray("a", "b", "c", "d");
+        Observable<String> observable = Observable.fromArray("1", "2", "3", "4");
         Observer<String> observer = new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
