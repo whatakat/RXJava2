@@ -14,6 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -128,6 +129,20 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }).distinct();
         distinctObservable.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Timber.d("onNext: "+s);
+            }
+        });
+        //filter
+        Observable<String> filterObservable = Observable.fromIterable(Arrays.asList("filter1", "filter10", "filter11","filter20")).
+                filter(new Predicate<String>() {
+                    @Override
+                    public boolean test(String s) throws Exception {
+                            return !s.contains("0");
+                    }
+                });
+        filterObservable.subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
                 Timber.d("onNext: "+s);
