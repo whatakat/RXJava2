@@ -47,16 +47,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNext(String s) {
+                Timber.d("onNext: "+s);
 
             }
 
             @Override
             public void onError(Throwable e) {
+                Timber.e(e,"failed to just");
 
             }
 
             @Override
             public void onComplete() {
+                Timber.d("onComplete");
 
             }
         });
