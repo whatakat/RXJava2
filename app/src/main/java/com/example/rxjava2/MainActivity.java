@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
@@ -14,6 +15,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Function3;
+import io.reactivex.functions.Function4;
 import io.reactivex.functions.Predicate;
 import timber.log.Timber;
 
@@ -155,6 +158,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void accept(String s) throws Exception {
                 Timber.d("onNext: "+s);
+            }
+        });
+        //zip
+        Observable<String> zipObservable0 = Observable.just("zip0","zip01");
+        Observable<String> zipObservable1 = Observable.just("zip1","zip11");
+        Observable<String> zipObservable2 = Observable.just("zip2","zip21");
+        Observable<List<String>> zipObservable = Observable.zip(zipObservable0, zipObservable1, zipObservable2, new Function3<String, String, String, List<String>>() {
+            @Override
+            public List<String> apply(String s, String s2, String s3) throws Exception {
+                return Arrays.asList(s,s2,s3);
+            }
+        });
+        zipObservable.subscribe(new Consumer<List<String>>() {
+            @Override
+            public void accept(List<String> strings) throws Exception {
+                Timber.d(strings.get(0)+" "+strings.get(1)+" "+strings.get(2));
             }
         });
 
