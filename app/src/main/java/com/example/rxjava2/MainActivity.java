@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        // 1 second
         Observable<Long> intervalObservable = Observable.interval(1, TimeUnit.SECONDS);
         intervalObservable.subscribe(new Consumer<Long>() {
             @Override
@@ -95,5 +96,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+           //skip 2 - it's means skip 0 and 1, start from 2
+        Observable<Long> skipObservable = Observable.interval(1, TimeUnit.SECONDS);
+        skipObservable.skip(2).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                Timber.d("onNext: "+aLong);
+
+            }
+        });
+
     }
 }
