@@ -13,6 +13,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-           //skip 2 - it's means skip 0 and 1, start from 2
+           //skip 2 - it's means skip 0 and 1, start from 2. if it 'observable.take(2)... - conversely all before 2(first two)
         Observable<Long> skipObservable = Observable.interval(1, TimeUnit.SECONDS);
         skipObservable.skip(2).subscribe(new Consumer<Long>() {
             @Override
@@ -105,6 +106,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        Observable<String> mapObservable = Observable.fromIterable(Arrays.asList("map0","map1","map2","map3"));
+        mapObservable.map(new Function<String, Integer>() {
+            @Override
+            public Integer apply(String s) throws Exception {
+                return s.length();
+            }
+        })
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Timber.d("onNext: "+integer);
+                    }
+                });
 
     }
 }
