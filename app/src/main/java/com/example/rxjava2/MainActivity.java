@@ -18,6 +18,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;
 import io.reactivex.functions.Function4;
 import io.reactivex.functions.Predicate;
+import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -176,6 +177,15 @@ public class MainActivity extends AppCompatActivity {
                 Timber.d(strings.get(0)+" "+strings.get(1)+" "+strings.get(2));
             }
         });
+
+        PublishSubject<String> subject = PublishSubject.create();
+        subject.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                //something
+            }
+        });
+        subject.onNext("123");
 
 
     }
