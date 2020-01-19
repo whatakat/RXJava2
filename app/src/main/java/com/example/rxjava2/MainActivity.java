@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import java.util.Arrays;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onComplete() {
+
+            }
+        });
+        Observable<Long> intervalObservable = Observable.interval(1, TimeUnit.SECONDS);
+        intervalObservable.subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+                Timber.d("onNext: "+aLong);
 
             }
         });
