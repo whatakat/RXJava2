@@ -4,11 +4,36 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import java.util.concurrent.Callable;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Observable<String> observable = Observable.fromCallable(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                Thread.sleep(1000);
+
+                return "result";
+            }
+        });
+        observable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                //do something with "s"
+
+            }
+        });
+        Observable<String> justObservable = Observable.just("just");
     }
 }
