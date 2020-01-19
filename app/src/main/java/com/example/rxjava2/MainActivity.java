@@ -119,6 +119,20 @@ public class MainActivity extends AppCompatActivity {
                         Timber.d("onNext: "+integer);
                     }
                 });
+        //distinct returns unique values (for our example : distinct0 and distinct10) don't forget for function +0
+        Observable<String> distinctObservable = Observable.fromIterable(Arrays.asList("distinct", "distinct0","distinct1")).
+                map(new Function<String, String>() {
+                    @Override
+                    public String apply(String s) throws Exception {
+                        return s.contains("0")? s : s+ "0" ;
+                    }
+                }).distinct();
+        distinctObservable.subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Timber.d("onNext: "+s);
+            }
+        })
 
     }
 }
