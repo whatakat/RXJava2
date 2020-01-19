@@ -10,6 +10,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -186,6 +188,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         subject.onNext("123");
+        //create
+        Observable<Integer> someObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+                try {
+                    Integer a = 0;
+                    a++;
+                    emitter.onNext(a);
+
+                }catch (Exception e){
+                    emitter.onError(new RuntimeException());
+                    return;
+                }
+                emitter.onComplete();
+            }
+        });
+
 
 
     }
