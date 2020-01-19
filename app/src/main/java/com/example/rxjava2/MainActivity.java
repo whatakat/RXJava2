@@ -11,6 +11,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         justObservable.subscribe(new Observer<String>() {
             @Override
             public void onSubscribe(Disposable d) {
+                Timber.d("onSubscribe");
 
             }
 
