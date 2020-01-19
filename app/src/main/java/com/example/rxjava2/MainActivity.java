@@ -147,7 +147,17 @@ public class MainActivity extends AppCompatActivity {
             public void accept(String s) throws Exception {
                 Timber.d("onNext: "+s);
             }
-        })
+        });
+        //merge
+        Observable<String> mergeObservable1 = Observable.fromIterable(Arrays.asList("merge0","merge2","merge4"));
+        Observable<String> mergeObservable2 = Observable.fromIterable(Arrays.asList("merge1","merge3","merge5"));
+        mergeObservable1.mergeWith(mergeObservable2).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Timber.d("onNext: "+s);
+            }
+        });
+
 
     }
 }
