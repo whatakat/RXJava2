@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import java.util.Arrays;
 import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
@@ -53,13 +54,35 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
-                Timber.e(e,"failed to just");
+                Timber.e(e,"failed to from");
 
             }
 
             @Override
             public void onComplete() {
                 Timber.d("onComplete");
+
+            }
+        });
+        Observable<String> fromObservable = Observable.fromIterable(Arrays.asList("from0","from1","from2"));
+        fromObservable.subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
 
             }
         });
