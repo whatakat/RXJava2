@@ -13,6 +13,8 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -220,7 +222,27 @@ public class MainActivity extends AppCompatActivity {
             public void accept(Long aLong) throws Exception {
 
             }
-        })
+        });
+        // Single (may be network calls, get API for example)
+
+        Single<Integer> single = Single.just(1);
+        single.subscribe(new SingleObserver<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(Integer integer) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+
 
 
 
