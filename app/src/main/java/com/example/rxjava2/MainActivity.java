@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeObserver;
@@ -28,6 +29,7 @@ import io.reactivex.functions.Function4;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subscribers.DisposableSubscriber;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
@@ -282,6 +284,30 @@ public class MainActivity extends AppCompatActivity {
                 emitter.onComplete();
             }
         });
+        //flowable
+        Flowable.range(1,1000000)
+                .onBackpressureBuffer()
+                .subscribe(new DisposableSubscriber<Integer>() {
+                    @Override
+                    protected void onStart() {
+                        request(1);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                })
 
 
 
