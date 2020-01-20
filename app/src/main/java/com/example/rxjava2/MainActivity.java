@@ -10,7 +10,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Maybe;
+import io.reactivex.MaybeEmitter;
 import io.reactivex.MaybeObserver;
+import io.reactivex.MaybeOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -266,6 +268,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete() {
 
+            }
+        });
+        //MayBe.create  for example  user's birthday
+
+        Maybe.create(new MaybeOnSubscribe<String>() {
+            @Override
+            public void subscribe(MaybeEmitter<String> emitter) throws Exception {
+                //getUserBirthday()
+                //if(birthday!=null)
+                emitter.onSuccess("Congratulations!");
+                //else
+                emitter.onComplete();
             }
         });
 
