@@ -20,6 +20,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;
 import io.reactivex.functions.Function4;
 import io.reactivex.functions.Predicate;
+import io.reactivex.observables.ConnectableObservable;
 import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
@@ -204,6 +205,22 @@ public class MainActivity extends AppCompatActivity {
                 emitter.onComplete();
             }
         });
+        //hot Observable
+
+        ConnectableObservable<Long> interval = Observable.interval(500,TimeUnit.SECONDS).publish();
+        interval.connect();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        interval.subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Exception {
+
+            }
+        })
 
 
 
