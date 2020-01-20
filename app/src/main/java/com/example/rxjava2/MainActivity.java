@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Maybe;
+import io.reactivex.MaybeObserver;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -239,6 +241,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
+
+            }
+        });
+        //MayBe or not
+
+        Maybe<Integer> mayBe = Maybe.just(1);
+        mayBe.subscribe(new MaybeObserver<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(Integer integer) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
 
             }
         });
