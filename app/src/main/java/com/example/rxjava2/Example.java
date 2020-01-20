@@ -19,7 +19,7 @@ import io.reactivex.functions.Function;
 
 public class Example {
     public void something(){
-        doSomethingWithNotNull(null);//you can't put null this
+        doSomethingWithNotNull(null);//you can't put null this. @Nullable - you can
     }
     private void doSomethingWithNotNull(@NonNull String string){
 
